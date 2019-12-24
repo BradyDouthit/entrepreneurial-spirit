@@ -1,6 +1,7 @@
 import React from 'react';
 
 function PlayerInfo(props) {
+    console.log(props.ownedItems)
     return (
         <div id="player-info">
             <h3>Your money:</h3>

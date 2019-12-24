@@ -13,29 +13,41 @@ class App extends React.Component {
   state = {
     ItemList,
     money: 500,
+    ownedItems: []
   }
 
-  buyItem = (itemPrice) => {
+  componentDidMount() {
+
+  }
+
+  buyItem = (itemPrice, itemName, itemID) => {
     let currentMoney = this.state.money;
     if (currentMoney > itemPrice) {
+
+      let boughtItem = {
+        id: itemID,
+        name: itemName,
+        price: itemPrice,
+        quantity: 1
+      };
+
       currentMoney = currentMoney - itemPrice;
-      let roundedMoney = Math.round(100*currentMoney)/100
-      this.setState({ money: roundedMoney })
-      console.log(this.state.money)
+      let roundedMoney = Math.round(100 * currentMoney) / 100;
+      this.setState({ money: roundedMoney });
     }
   }
 
   render() {
     return (
       <div className="App">
-        <PlayerInfo money={this.state.money} />
-        {this.state.ItemList.map(item => 
+        <PlayerInfo ownedItems={this.state.ownedItems} money={this.state.money} />
+        {this.state.ItemList.map(item =>
           <Item
-          key={item.id}
-          buyItem={this.buyItem}
-          price={item.price}
-          quantity={20}
-          name={item.name} />
+            itemID={item.id}
+            key={item.id}
+            buyItem={this.buyItem}
+            price={item.price}
+            name={item.name} />
         )}
       </div>
     );
