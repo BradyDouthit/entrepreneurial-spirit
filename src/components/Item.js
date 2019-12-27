@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Item(props) {
-    console.log(props.itemID)
     return (
         <div className="item-wrapper">
             <div className="item-name">{props.name}</div>

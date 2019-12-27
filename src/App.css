@@ -5,3 +5,15 @@
 #player-money {
   color: limegreen;
 }
+
+*:focus {
+  outline: none;
+}
+
+.buy-item {
+  width: 100%;
+}
+
+.styles_modalCenter__L9F2w {
+  text-align: center;
+}

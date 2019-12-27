@@ -3,6 +3,8 @@ import './App.css';
 import Item from './components/Item';
 import ItemList from './ItemList.json';
 import PlayerInfo from './components/PlayerInfo';
+import ReactDOM from 'react-dom';
+import Modal from 'react-responsive-modal';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,12 +15,21 @@ class App extends React.Component {
   state = {
     ItemList,
     money: 500,
-    ownedItems: []
+    ownedItems: [],
+    open: false
   }
 
   componentDidMount() {
 
   }
+
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
 
   buyItem = (itemPrice, itemName, itemID) => {
     let currentMoney = this.state.money;
@@ -38,8 +49,13 @@ class App extends React.Component {
   }
 
   render() {
+    const { open } = this.state
     return (
       <div className="App">
+        <PlayerInfo ownedItems={this.state.ownedItems} money={this.state.money} />
+        
+        <button onClick={this.onOpenModal}>View Stock Prices</button>
+        <Modal open={open} onClose={this.onCloseModal} center>
         <PlayerInfo ownedItems={this.state.ownedItems} money={this.state.money} />
         {this.state.ItemList.map(item =>
           <Item
@@ -49,6 +65,7 @@ class App extends React.Component {
             price={item.price}
             name={item.name} />
         )}
+        </Modal>
       </div>
     );
   };
