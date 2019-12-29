@@ -5,7 +5,8 @@ mongoose.promise = Promise;
 // Define userSchema
 const stocksSchema = new Schema({
     symbol: String,
-    data: String
+    data: String,
+    hasBeenModified: false
 })
 
 const Stocks = mongoose.model('Stocks', stocksSchema)
