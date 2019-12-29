@@ -4,7 +4,6 @@ import Item from './components/Item';
 import ItemList from './ItemList.json';
 import PlayerInfo from './components/PlayerInfo';
 import Modal from 'react-responsive-modal';
-import ItemInfo from './components/ItemInfo';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -40,8 +39,24 @@ class App extends React.Component {
   };
 
   getStocksData = () => {
+    //get data
     axios.get('/api/stocks').then(data => {
-      console.log(data)
+      //map data
+      data.data.map(entry => {
+        //convert to array and get prices back as an object
+        const datesArr = Object.entries(entry.data);
+        let latestPrices = datesArr[0][1];
+        let oldestPrices = datesArr[datesArr.length - 1][1];
+        
+        let symbol = entry.symbol;
+        let prices = {
+          symbol: symbol,
+          latestPrices: latestPrices,
+          oldestPrices: oldestPrices
+        }
+        console.log(prices)
+        return prices;
+      })
     })
   }
 
