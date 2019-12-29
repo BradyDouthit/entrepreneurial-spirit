@@ -1,19 +1,22 @@
 let express = require("express");
 let mongoose = require("mongoose");
 let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/EntrepreneurialSpirit";
-let router = express.Router();
 let axios = require('axios');
 let schedule = require('node-schedule');
 
 // get models
 let stocks = require("./models/stocks");
-// let comment = require("./models/comment");
 
+// get routes
+let api = require('./routes/api')
+
+// set port
 let PORT = process.env.PORT || 8080;
 
 // Initialize Express
 let app = express();
 
+app.use('/api', api)
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

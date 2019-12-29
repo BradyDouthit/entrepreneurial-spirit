@@ -40,7 +40,9 @@ class App extends React.Component {
   };
 
   getStocksData = () => {
-    
+    axios.get('/api/stocks').then(data => {
+      console.log(data)
+    })
   }
 
   getPrices = () => {
@@ -99,7 +101,7 @@ class App extends React.Component {
             price={item.price}
             name={item.name} />
         )}
-        <button onClick={this.openStockMarket}>Open the Stock Market!</button>
+        <button onClick={this.getStocksData}>Open the Stock Market!</button>
 
         <Modal open={open} onClose={this.onCloseModal} center>
           <PlayerInfo ownedItems={this.state.ownedItems} money={this.state.money} />
