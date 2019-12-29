@@ -10,6 +10,7 @@ router.get('/stocks', (req, res) => {
         //map each database entry and format properly
         data.map(entry => {
             let dataToSend = {
+                id: entry._id,
                 symbol: entry.symbol,
                 data: JSON.parse(entry.data)
             };

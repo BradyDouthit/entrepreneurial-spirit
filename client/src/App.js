@@ -13,7 +13,7 @@ class App extends React.Component {
     this.buyItem = this.buyItem.bind(this);
   }
   state = {
-    ItemList,
+    ItemList: [],
     updatedItemList: ItemList,
     money: 500,
     ownedItems: [],
@@ -39,6 +39,7 @@ class App extends React.Component {
   };
 
   getStocksData = () => {
+    let ItemListState = [];
     //get data
     axios.get('/api/stocks').then(data => {
       //map data
@@ -50,40 +51,21 @@ class App extends React.Component {
         
         let symbol = entry.symbol;
         let prices = {
+          id: entry.id,
           symbol: symbol,
           latestPrices: latestPrices,
           oldestPrices: oldestPrices
         }
         console.log(prices)
+        ItemListState.push(prices)
+        this.setState({ ItemList: ItemListState })
         return prices;
       })
     })
+    console.log(this.state.ItemList)
   }
 
   getPrices = () => {
-    this.setState({ updatedItemList: ItemList })
-
-    //get a random percentage to multiply the price by
-    let randomDecimal = Math.round(100 * Math.random() / 4) / 100;
-    console.log(randomDecimal)
-    let addOrSubtractDeterminate = Math.round(Math.random());
-
-    //if value is 1, add to the item price
-    if (addOrSubtractDeterminate) {
-      this.state.updatedItemList.map(item => {
-        let roundedPrice = Math.round(100 * ((item.price * randomDecimal) + item.price)) / 100
-        //make sure that prices never go negative
-        roundedPrice <= 50 ? roundedPrice = 50 : item.price = roundedPrice;
-      })
-    }
-    //if value is 0, subtract from the item price
-    else if (!addOrSubtractDeterminate) {
-      this.state.updatedItemList.map(item => {
-        let roundedPrice = Math.round(100 * (item.price - (item.price * randomDecimal))) / 100
-        //make sure that prices never go negative
-        roundedPrice <= 50 ? roundedPrice = 50 : item.price = roundedPrice;
-      })
-    }
 
   }
 
@@ -110,11 +92,11 @@ class App extends React.Component {
         <PlayerInfo ownedItems={this.state.ownedItems} money={this.state.money} />
         {this.state.ItemList.map(item =>
           <Item
-            itemID={item.id}
+            itemID={item.symbol}
             key={item.id}
             buyItem={this.buyItem}
-            price={item.price}
-            name={item.name} />
+            price={item.latestPrices['4. close'] === undefined ? item.latestPrices['4b. close (USD)'] : item.latestPrices['4. close']}
+            symbol={item.symbol} />
         )}
         <button onClick={this.getStocksData}>Open the Stock Market!</button>
 
