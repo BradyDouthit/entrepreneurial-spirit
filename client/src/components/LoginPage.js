@@ -23,6 +23,7 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
+                <h1>Welcome! To get started, please sign in with google.</h1>
                 <GoogleLogin
                     clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     buttonText="Login"
@@ -30,8 +31,6 @@ class LoginPage extends React.Component {
                     onFailure={this.responseGoogle}
                     cookiePolicy={'single_host_origin'}
                 />
-
-                <button id="googleButton" onClick={this.props.logIn}>Log In</button>
             </div>
         );
     }
