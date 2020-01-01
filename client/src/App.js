@@ -1,3 +1,4 @@
+/* global gapi */
 import React from 'react';
 import './App.css';
 import Item from './components/Item';
@@ -20,10 +21,11 @@ class App extends React.Component {
     money: 10000,
     ownedItems: [],
     open: false,
-    loggedIn: false
+    loggedIn: false,
+    profile: null
   }
 
-  componentDidMount() {
+  componentDidMount() {    
     this.getStocksData();
   }
 
@@ -78,18 +80,25 @@ class App extends React.Component {
     }
   }
 
+  logIn = (loggedInState, profile) => {
+    this.setState({ loggedIn: loggedInState, profile: profile })
+  }
+
   render() {
     const { open } = this.state;
     return (
       <div className="App">
-        {this.state.loggedIn ? 
+        {this.state.loggedIn
+        ? 
         <StocksPage 
+        profile={this.state.profile}
         money={this.state.money}
         buyItem={this.buyItem}
         ownedItems={this.state.ownedItems}
         getStocksData={this.getStocksData}
-        ItemList={this.state.ItemList} /> :
-        <LoginPage />
+        ItemList={this.state.ItemList} />
+        :
+        <LoginPage logIn={this.logIn} />
         }
 
         <Modal open={open} onClose={this.onCloseModal} center>

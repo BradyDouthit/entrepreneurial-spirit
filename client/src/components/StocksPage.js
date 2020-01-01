@@ -4,7 +4,7 @@ import Item from './Item';
 function StocksPage(props) {
     return (
         <div>
-            <PlayerInfo ownedItems={props.ownedItems} money={props.money} />
+            <PlayerInfo profile={props.profile} ownedItems={props.ownedItems} money={props.money} />
             {props.ItemList.map(item =>
                 <Item
                     itemID={item.symbol}
