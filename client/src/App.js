@@ -5,6 +5,8 @@ import ItemList from './ItemList.json';
 import PlayerInfo from './components/PlayerInfo';
 import Modal from 'react-responsive-modal';
 import axios from 'axios';
+import LoginPage from './components/LoginPage';
+import StocksPage from './components/StocksPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,19 +17,14 @@ class App extends React.Component {
   state = {
     ItemList: [],
     updatedItemList: ItemList,
-    money: 500,
+    money: 10000,
     ownedItems: [],
-    open: false
+    open: false,
+    loggedIn: false
   }
 
   componentDidMount() {
     this.getStocksData();
-  }
-
-  openStockMarket = () => {
-    setInterval(() => {
-      this.getPrices();
-    }, 1500)
   }
 
   onOpenModal = () => {
@@ -65,10 +62,6 @@ class App extends React.Component {
     console.log(this.state.ItemList)
   }
 
-  getPrices = () => {
-
-  }
-
   buyItem = (itemPrice, itemName, itemID) => {
 
     //verify player has enough money
@@ -89,16 +82,15 @@ class App extends React.Component {
     const { open } = this.state;
     return (
       <div className="App">
-        <PlayerInfo ownedItems={this.state.ownedItems} money={this.state.money} />
-        {this.state.ItemList.map(item =>
-          <Item
-            itemID={item.symbol}
-            key={item.id}
-            buyItem={this.buyItem}
-            price={item.latestPrices['4. close'] === undefined ? item.latestPrices['4b. close (USD)'] : item.latestPrices['4. close']}
-            symbol={item.symbol} />
-        )}
-        <button onClick={this.getStocksData}>Open the Stock Market!</button>
+        {this.state.loggedIn ? 
+        <StocksPage 
+        money={this.state.money}
+        buyItem={this.buyItem}
+        ownedItems={this.state.ownedItems}
+        getStocksData={this.getStocksData}
+        ItemList={this.state.ItemList} /> :
+        <LoginPage />
+        }
 
         <Modal open={open} onClose={this.onCloseModal} center>
           <PlayerInfo ownedItems={this.state.ownedItems} money={this.state.money} />
