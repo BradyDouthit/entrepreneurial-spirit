@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 #player-money {
@@ -10,9 +12,20 @@
   outline: none;
 }
 
-.buy-item {
-}
-
 .styles_modalCenter__L9F2w {
   text-align: center;
+}
+
+#login-page {
+  width: 100%;
+  height: 100%;
+}
+
+#login-grid {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto;
+  width: 80%;
+  height: 100%;
+  color: white;
 }

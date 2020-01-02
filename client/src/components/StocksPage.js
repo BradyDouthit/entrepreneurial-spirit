@@ -3,7 +3,7 @@ import PlayerInfo from './PlayerInfo';
 import Item from './Item';
 function StocksPage(props) {
     return (
-        <div>
+        <div id="">
             <PlayerInfo profile={props.profile} ownedItems={props.ownedItems} money={props.money} />
             {props.ItemList.map(item =>
                 <Item
