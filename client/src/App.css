@@ -23,9 +23,42 @@
 
 #login-grid {
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: auto;
   width: 80%;
   height: 100%;
   color: white;
+  display: grid;
+
+}
+
+#navbar {
+  width: 100vw;
+  position: fixed; 
+  align-items: center;
+  left: 0;
+  top: 0;
+  padding: 10px 0;
+  display: inline-grid;
+  grid-template-columns: auto auto 33%;
+  background-color: rgba(40, 255, 0, 0.3);
+}
+
+#get-started {
+  width: 85%;
+  border-radius: 20px;
+  padding: 3px;
+  border: 1px solid white;
+}
+
+#welcome-message {
+  margin-top: 4em;
+}
+
+#nav-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-color: rgba(40, 255, 0, 0.3);
 }

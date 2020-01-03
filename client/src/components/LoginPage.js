@@ -1,5 +1,6 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
+import Navbar from './Navbar';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -22,9 +23,13 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <div className='t-bg' id="login-page">
+            <div className='' id="login-page">
                 <div id="login-grid">
-                    <h1>Learn to invest at no cost</h1>
+                    <Navbar />
+                    <div id="welcome-message">
+                        <h1>Learn to invest at no cost</h1>
+                        <p>Real stock prices, no risk.</p>
+                    </div>
                     <div id="google-button">
                         <GoogleLogin
                             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}

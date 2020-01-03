@@ -9,6 +9,7 @@ import Modal from 'react-responsive-modal';
 import axios from 'axios';
 import LoginPage from './components/LoginPage';
 import StocksPage from './components/StocksPage';
+import NavMenu from './components/NavMenu';
 
 class App extends React.Component {
   constructor(props) {
@@ -87,7 +88,7 @@ class App extends React.Component {
   render() {
     const { open } = this.state;
     return (
-      <div className="App">
+      <div className="App t-bg">
         {this.state.loggedIn
           ?
           <StocksPage
@@ -100,7 +101,6 @@ class App extends React.Component {
           :
           <LoginPage logIn={this.logIn} />
         }
-
         <Modal open={open} onClose={this.onCloseModal} center>
           <PlayerInfo ownedItems={this.state.ownedItems} money={this.state.money} />
         </Modal>
