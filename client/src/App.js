@@ -26,7 +26,7 @@ class App extends React.Component {
     loggedIn: false,
     profile: null
   }
-
+  
   componentDidMount() {
     this.getStocksData();
   }
