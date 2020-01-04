@@ -40,8 +40,16 @@ class LoginPage extends React.Component {
             anime({
                 targets: "#nav-menu",
                 translateY: '100vh',
+                translateX: '100vw',
                 opacity: 1,
                 easing: 'easeInOutSine',
+                duration: 300
+            }).play();
+            //change color of navbar to match background
+            anime({
+                targets: "#navbar",
+                backgroundColor: 'rgb(41, 41, 41)',
+                easing: 'linear',
                 duration: 300
             }).play();
         }
@@ -50,7 +58,15 @@ class LoginPage extends React.Component {
             anime({
                 targets: "#nav-menu",
                 translateY: '-100vh',
+                translateX: '-100vw',
                 easing: 'easeInOutSine',
+                duration: 300
+            }).play();
+            //change color of navbar to match background
+            anime({
+                targets: "#navbar",
+                backgroundColor: 'rgba(40, 255, 0, 0.3)',
+                easing: 'linear',
                 duration: 300
             }).play();
         }

@@ -4,6 +4,10 @@
   height: 100vh;
 }
 
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
 #player-money {
   color: limegreen;
 }
@@ -61,16 +65,27 @@ a {
 #nav-menu {
   position: absolute;
   top: -100vh;
-  left: 0;
+  left: -100vw;
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  background-color:rgb(41, 41, 41);
-  display: grid;
+  background-color: rgb(41, 41, 41);
   align-items: center;
 }
 
 #nav-menu a {
   font-size: 1.5em;
   text-shadow: 0 1px 2 #ccc;
+}
+
+#nav-menu ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+  display: block;
+  margin-top: 100px;
+}
+
+#nav-menu ul li {
+  margin: 20px 0;
 }
