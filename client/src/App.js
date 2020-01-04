@@ -1,15 +1,12 @@
-/* global gapi */
 import React from 'react';
 import './App.css';
 import './css/topographyBackground.css';
-import Item from './components/Item';
 import ItemList from './ItemList.json';
 import PlayerInfo from './components/PlayerInfo';
 import Modal from 'react-responsive-modal';
 import axios from 'axios';
 import LoginPage from './components/LoginPage';
 import StocksPage from './components/StocksPage';
-import NavMenu from './components/NavMenu';
 
 class App extends React.Component {
   constructor(props) {

@@ -1,17 +1,15 @@
 import React from 'react';
 import Navbar from './Navbar';
 
-function NavMenu (props) {
+function NavMenu(props) {
     return (
-
-        <div style={{ zIndex: props.style.zIndex, color: 'white' }} id="nav-menu">
-            <Navbar />
-            <a>Test</a>
-            <a>Test</a>
-            <a>Test</a>
-            <a>Test</a>
-            <a>Test</a>
-            <a>Test</a>
+        <div style={{zIndex: props.style.zIndex}} id="nav-menu">
+            <a href="#">Test</a>
+            <a href="#">Test</a>
+            <a href="#">Test</a>
+            <a href="#">Test</a>
+            <a href="#">Test</a>
+            <a href="#">Test</a>
         </div>
     );
 }

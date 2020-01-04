@@ -1,6 +1,4 @@
 import React from 'react';
-import NavMenu from '../components/NavMenu'
-import NavbarOpenClose from './NavbarOpenClose';
 
 class Navbar extends React.Component {
     constructor(props) {
@@ -11,7 +9,7 @@ class Navbar extends React.Component {
         return (
             <div>
                 <header id="navbar">
-                    <NavbarOpenClose style={this.navStyles} setNavState={this.props.setNavState} />
+                    <i onClick={() => this.props.playNavAnimation()} className="fas fa-bars fa-lg"></i>
                     <div>Logo</div>
                     {/* <i className="fas fa-chart-line fa-lg"></i> */}
                     <a id="get-started">Get Started</a>

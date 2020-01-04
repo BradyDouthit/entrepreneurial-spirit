@@ -12,6 +12,11 @@
   outline: none;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
 .styles_modalCenter__L9F2w {
   text-align: center;
 }
@@ -33,6 +38,7 @@
   width: 100vw;
   position: fixed;
   align-items: center;
+  z-index: 100;
   left: 0;
   top: 0;
   padding: 10px 0;
@@ -54,12 +60,12 @@
 
 #nav-menu {
   position: absolute;
-  top: 0;
+  top: -100vh;
   left: 0;
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  background-color: /*rgba(40, 255, 0, 0.7)*/ rgb(41, 41, 41);
+  background-color:rgb(41, 41, 41);
   display: grid;
   align-items: center;
 }
