@@ -9,7 +9,9 @@ class Navbar extends React.Component {
         return (
             <div>
                 <header id="navbar">
-                    <i onClick={() => this.props.playNavAnimation()} className="fas fa-bars fa-lg"></i>
+                    {this.props.isNavOpen ? 
+                    <div onClick={() => this.props.playNavAnimation(false)}>X</div>: 
+                    <i onClick={() => this.props.playNavAnimation(true)} className="fas fa-bars fa-lg"></i>}
                     <div>Logo</div>
                     {/* <i className="fas fa-chart-line fa-lg"></i> */}
                     <a id="get-started">Get Started</a>

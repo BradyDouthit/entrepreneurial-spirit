@@ -13,7 +13,8 @@ class LoginPage extends React.Component {
     state = {
         navStyles: {
             zIndex: -1
-        }
+        },
+        isNavOpen: false,
     }
 
     responseGoogle = (response) => {
@@ -27,19 +28,32 @@ class LoginPage extends React.Component {
         }
     }
 
-    playNavAnimation = () => {
+    playNavAnimation = (openState) => {
         this.setState({
             navStyles: {
                 zIndex: 1
-            }
+            },
+            isNavOpen: openState
         })
-        anime({
-            targets: "#nav-menu",
-            translateY: '100vh',
-            opacity: 1,
-            easing: 'easeInOutSine',
-            duration: 300
-        }).play();
+        if (openState) {
+            //slide nav menu down
+            anime({
+                targets: "#nav-menu",
+                translateY: '100vh',
+                opacity: 1,
+                easing: 'easeInOutSine',
+                duration: 300
+            }).play();
+        }
+        else if (!openState) {
+            //slid nav menu up
+            anime({
+                targets: "#nav-menu",
+                translateY: '-100vh',
+                easing: 'easeInOutSine',
+                duration: 300
+            }).play();
+        }
     }
 
     render() {
@@ -47,7 +61,7 @@ class LoginPage extends React.Component {
             <div className='' id="login-page">
                 <NavMenu style={this.state.navStyles} />
                 <div id="login-grid">
-                    <Navbar playNavAnimation={this.playNavAnimation} />
+                    <Navbar isNavOpen={this.state.isNavOpen} playNavAnimation={this.playNavAnimation} />
                     <div id="welcome-message">
                         <h1>Learn to invest at no cost</h1>
                         <p>Real stock prices, no risk.</p>
