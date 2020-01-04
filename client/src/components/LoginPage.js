@@ -3,6 +3,7 @@ import GoogleLogin from 'react-google-login';
 import Navbar from './Navbar';
 import NavMenu from '../components/NavMenu';
 import anime from 'animejs';
+import GetStartedButton from './GetStartedButton';
 
 
 class LoginPage extends React.Component {
@@ -82,6 +83,7 @@ class LoginPage extends React.Component {
                         <h1>Learn to invest at no cost</h1>
                         <p>Real stock prices, no risk.</p>
                     </div>
+                    <GetStartedButton />
                     <div id="google-button">
                         <GoogleLogin
                             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}

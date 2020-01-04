@@ -63,11 +63,14 @@ button {
   background-color: rgba(40, 255, 0, 0.3);
 }
 
-#get-started {
-  width: 85%;
+.get-started {
   border-radius: 20px;
   padding: 3px;
   border: 1px solid white;
+}
+
+#get-started-container {
+  width: 85%;
 }
 
 #welcome-message {
