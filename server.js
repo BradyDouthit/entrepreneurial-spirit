@@ -3,9 +3,11 @@ let mongoose = require("mongoose");
 let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/EntrepreneurialSpirit";
 let axios = require('axios');
 let schedule = require('node-schedule');
+let bodyParser = require('body-parser');
 
 // get models
 let stocks = require("./models/stocks");
+let users = require("./models/user");
 
 // get routes
 let api = require('./routes/api')
@@ -16,6 +18,12 @@ let PORT = process.env.PORT || 8080;
 // Initialize Express
 let app = express();
 
+app.use(
+    bodyParser.urlencoded({
+        extended: false
+    })
+);
+app.use(bodyParser.json());
 app.use('/api', api)
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));

@@ -15,7 +15,7 @@ class Navbar extends React.Component {
                         <i onClick={() => this.props.playNavAnimation(true)} className="cursor-pointer fas fa-bars fa-lg"></i>}
                     <div>Logo</div>
                     {/* <i className="fas fa-chart-line fa-lg"></i> */}
-                    <div id="get-started-container">
+                    <div id="navbar-button-container">
                         <GetStartedButton />
                     </div>
                 </header>

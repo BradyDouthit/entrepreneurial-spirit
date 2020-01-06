@@ -63,14 +63,36 @@ button {
   background-color: rgba(40, 255, 0, 0.3);
 }
 
-.get-started {
+.modal-button {
   border-radius: 20px;
   padding: 3px;
   border: 1px solid white;
+  width: 100%;
+  height: 100%;
 }
 
-#get-started-container {
+.modal-button-wrapper {
+  height: 100%;
+}
+
+#modal-content {
+  padding: 20px;
+}
+
+#modal-content p {
+  margin: 10px auto;
+}
+
+#signup-pw {
+  margin-bottom: 10px;
+}
+
+#navbar-button-container {
   width: 85%;
+}
+
+#login-page-button-wrapper {
+  height: 40px;
 }
 
 #welcome-message {
@@ -103,4 +125,8 @@ button {
 
 #nav-menu ul li {
   margin: 20px 0;
+}
+
+#google-button button {
+  width: 80%;
 }
