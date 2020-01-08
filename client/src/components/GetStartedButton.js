@@ -19,16 +19,22 @@ class GetStartedButton extends React.Component {
             console.log('could not log in: ' + response.error)
         }
         else {
-            let profile = response.profileObj;
+            let googleProfile = response.profileObj;
             axios.post('/api/user/google/signup', {
-                googleID: profile.googleId,
+                googleID: googleProfile.googleId,
                 username: this.state.usernameValue,
-                email: profile.email,
-                firstName: profile.givenName,
-                lastName: profile.familyName,
+                email: googleProfile.email,
+                firstName: googleProfile.givenName,
+                lastName: googleProfile.familyName,
                 password: this.state.passwordValue
             }).then(postResponse => {
                 console.log(postResponse)
+                let profile = {
+                    username: postResponse.data.username,
+                    email: postResponse.data.email,
+                    firstName: postResponse.data.firstName,
+                    lastName: postResponse.data.lastName
+                }
                 this.props.logIn(true, profile);
             })
         }
@@ -44,6 +50,13 @@ class GetStartedButton extends React.Component {
                 googleID: googleId
             }).then(postResponse => {
                 console.log(postResponse)
+                let profile = {
+                    username: postResponse.data.username,
+                    email: postResponse.data.email,
+                    firstName: postResponse.data.firstName,
+                    lastName: postResponse.data.lastName
+                }
+                this.props.logIn(true, profile);
             })
         }
     }

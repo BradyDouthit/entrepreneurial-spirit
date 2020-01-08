@@ -29,13 +29,8 @@ router.get('/stocks', (req, res) => {
 });
 
 router.post('/user/google/signup', (req, res) => {
-    console.log(req.body)
-
     Users.create({
-        "socialIDs": {
-            "googleID": req.body.googleID,
-            "facebookID": ''
-        },
+        "googleID": req.body.googleID,
         "username": req.body.username,
         "email": req.body.email,
         "firstName": req.body.firstName,
@@ -43,6 +38,7 @@ router.post('/user/google/signup', (req, res) => {
         "password": req.body.password
     }).then(response => {
         res.json(response)
+        console.log('----------DB SIGNUP RESPONSE----------')
         console.log(response)
     }).catch(error => {
         res.json(error)
@@ -51,7 +47,20 @@ router.post('/user/google/signup', (req, res) => {
 });
 
 router.post('/user/google/login', (req, res) => {
-    console.log(req.body)
+    Users.findOne({
+        "googleID": req.body.googleID
+    }).then(response => {
+        console.log('----------DB LOGIN RESPONSE----------')
+        console.log(response)
+        if (response === null) {
+            res.json({ error: 'could not find profile' })
+        }
+        else {
+            res.json(response)
+        }
+    }).catch(error => {
+        console.log(error)
+    })
 })
 
 module.exports = router;
