@@ -16,7 +16,7 @@ class GetStartedButton extends React.Component {
 
     signUpGoogleResponse = (response) => {
         if (response.error) {
-            console.log('could not log in: ' + response.error)
+            console.log('could not sign up: ' + response.error);
         }
         else {
             let googleProfile = response.profileObj;
@@ -29,40 +29,49 @@ class GetStartedButton extends React.Component {
                 password: this.state.passwordValue
             }).then(postResponse => {
                 console.log(postResponse)
-                let profile = {
-                    username: postResponse.data.username,
-                    email: postResponse.data.email,
-                    firstName: postResponse.data.firstName,
-                    lastName: postResponse.data.lastName
+                if (postResponse.data.errmsg) {
+                    console.log("error: " + postResponse.data.errmsg)
                 }
-                this.props.logIn(true, profile);
+                else {
+                    let profile = {
+                        username: postResponse.data.username,
+                        email: postResponse.data.email,
+                        firstName: postResponse.data.firstName,
+                        lastName: postResponse.data.lastName
+                    };
+
+                    this.props.logIn(true, profile);
+                }
             })
         }
     }
 
     signInGoogleResponse = (response) => {
         if (response.error) {
-            console.log('could not sign up: ' + response.error)
+            console.log('could not log in: ' + response.error)
         }
         else {
             let googleId = response.profileObj.googleId;
             axios.post('/api/user/google/login', {
                 googleID: googleId
             }).then(postResponse => {
-                console.log(postResponse)
-                let profile = {
-                    username: postResponse.data.username,
-                    email: postResponse.data.email,
-                    firstName: postResponse.data.firstName,
-                    lastName: postResponse.data.lastName
+                if (postResponse.data.error) {
+                    console.log('could not log in: ' + postResponse.data.error)
                 }
-                this.props.logIn(true, profile);
+                else {
+                    let profile = {
+                        username: postResponse.data.username,
+                        email: postResponse.data.email,
+                        firstName: postResponse.data.firstName,
+                        lastName: postResponse.data.lastName
+                    }
+                    this.props.logIn(true, profile);
+                }
             })
         }
     }
 
     handleChange = (event) => {
-        console.log(event.target)
         if (event.target.name === "username") {
             this.setState({ usernameValue: event.target.value });
         }
@@ -105,14 +114,16 @@ class GetStartedButton extends React.Component {
                             type="text"
                             name="username"
                             placeholder="username"></input>
-                        <label>Password: </label>
-                        {/* add a min length to password with minlength */}
-                        <input
-                            onChange={this.handleChange}
-                            value={this.state.passwordValue}
-                            id="signup-pw" type="password"
-                            name="password"
-                            placeholder="password"></input>
+                        <form>
+                            <label>Password: </label>
+                            {/* add a min length to password with minlength */}
+                            <input
+                                onChange={this.handleChange}
+                                value={this.state.passwordValue}
+                                id="signup-pw" type="password"
+                                name="password"
+                                placeholder="password"></input>
+                        </form>
                         <div id="google-button">
                             <GoogleLogin
                                 clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}

@@ -31,9 +31,9 @@ router.get('/stocks', (req, res) => {
 
 router.post('/user/google/signup', (req, res) => {
     //prepare to salt the password
-    bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.genSalt(10, function (err, salt) {
         //hash the password
-        bcrypt.hash(req.body.password, salt, function(err, hash) {
+        bcrypt.hash(req.body.password, salt, function (err, hash) {
             req.body.password = hash;
             if (err) throw err;
             //save the secured password to db
@@ -51,7 +51,7 @@ router.post('/user/google/signup', (req, res) => {
             }).catch(error => {
                 res.json(error)
                 console.log(error)
-            })
+            });
         });
     });
 });
@@ -67,10 +67,10 @@ router.post('/user/google/login', (req, res) => {
         }
         else {
             res.json(response)
-        }
+        };
     }).catch(error => {
-        console.log(error)
-    })
+        console.log(error);
+    });
 })
 
 module.exports = router;
