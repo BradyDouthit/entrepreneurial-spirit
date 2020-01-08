@@ -5,7 +5,11 @@ mongoose.promise = Promise;
 // Define userSchema
 const userSchema = new Schema({
     socialIDs: Object,
-    email: String,
+    username: String,
+    email: {
+        type: String,
+        unique: true
+    },
     firstName: String,
     lastName: String,
     password: String

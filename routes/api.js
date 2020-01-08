@@ -36,6 +36,7 @@ router.post('/user/google/signup', (req, res) => {
             "googleID": req.body.googleID,
             "facebookID": ''
         },
+        "username": req.body.username,
         "email": req.body.email,
         "firstName": req.body.firstName,
         "lastName": req.body.lastName,
@@ -48,5 +49,9 @@ router.post('/user/google/signup', (req, res) => {
         console.log(error)
     })
 });
+
+router.post('/user/google/login', (req, res) => {
+    console.log(req.body)
+})
 
 module.exports = router;
