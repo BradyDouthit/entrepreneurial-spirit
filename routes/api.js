@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Stocks = require('../models/stocks');
 const Users = require('../models/user');
+const bcrypt = require('bcryptjs');
 
 router.get('/stocks', (req, res) => {
     Stocks.find({})
@@ -29,21 +30,30 @@ router.get('/stocks', (req, res) => {
 });
 
 router.post('/user/google/signup', (req, res) => {
-    Users.create({
-        "googleID": req.body.googleID,
-        "username": req.body.username,
-        "email": req.body.email,
-        "firstName": req.body.firstName,
-        "lastName": req.body.lastName,
-        "password": req.body.password
-    }).then(response => {
-        res.json(response)
-        console.log('----------DB SIGNUP RESPONSE----------')
-        console.log(response)
-    }).catch(error => {
-        res.json(error)
-        console.log(error)
-    })
+    //prepare to salt the password
+    bcrypt.genSalt(10, function(err, salt) {
+        //hash the password
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+            req.body.password = hash;
+            if (err) throw err;
+            //save the secured password to db
+            Users.create({
+                "googleID": req.body.googleID,
+                "username": req.body.username,
+                "email": req.body.email,
+                "firstName": req.body.firstName,
+                "lastName": req.body.lastName,
+                "password": req.body.password
+            }).then(response => {
+                res.json(response)
+                console.log('----------DB SIGNUP RESPONSE----------')
+                console.log(response)
+            }).catch(error => {
+                res.json(error)
+                console.log(error)
+            })
+        });
+    });
 });
 
 router.post('/user/google/login', (req, res) => {
