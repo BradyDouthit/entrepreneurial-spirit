@@ -12,6 +12,10 @@
   color: limegreen;
 }
 
+.item-price {
+  color: limegreen;
+}
+
 *:focus {
   outline: none;
 }
@@ -125,4 +129,8 @@ button {
 
 #google-button button {
   width: 80%;
+}
+
+#stocks-page {
+  color: white;
 }

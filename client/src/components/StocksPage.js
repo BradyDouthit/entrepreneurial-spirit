@@ -1,10 +1,12 @@
 import React from 'react';
 import PlayerInfo from './PlayerInfo';
 import Item from './Item';
+import StockChart from './StockChart';
 function StocksPage(props) {
     return (
-        <div id="">
+        <div id="stocks-page">
             <PlayerInfo profile={props.profile} ownedItems={props.ownedItems} money={props.money} />
+            <StockChart />
             {props.ItemList.map(item =>
                 <Item
                     itemID={item.symbol}

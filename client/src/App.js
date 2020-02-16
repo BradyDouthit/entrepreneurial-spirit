@@ -2,8 +2,6 @@ import React from 'react';
 import './App.css';
 import './css/topographyBackground.css';
 import ItemList from './ItemList.json';
-import PlayerInfo from './components/PlayerInfo';
-import Modal from 'react-responsive-modal';
 import axios from 'axios';
 import LoginPage from './components/LoginPage';
 import StocksPage from './components/StocksPage';
@@ -18,23 +16,14 @@ class App extends React.Component {
     ItemList: [],
     updatedItemList: ItemList,
     money: 10000,
-    ownedItems: [],
     open: false,
     loggedIn: false,
     profile: null
   }
-  
+
   componentDidMount() {
     this.getStocksData();
   }
-
-  onOpenModal = () => {
-    this.setState({ open: true });
-  };
-
-  onCloseModal = () => {
-    this.setState({ open: false });
-  };
 
   getStocksData = () => {
     let ItemListState = [];
@@ -83,7 +72,6 @@ class App extends React.Component {
   }
 
   render() {
-    const { open } = this.state;
     return (
       <div className="App t-bg">
         {this.state.loggedIn
@@ -98,9 +86,6 @@ class App extends React.Component {
           :
           <LoginPage logIn={this.logIn} />
         }
-        <Modal open={open} onClose={this.onCloseModal} center>
-          <PlayerInfo ownedItems={this.state.ownedItems} money={this.state.money} />
-        </Modal>
       </div>
     );
   };

@@ -63,8 +63,10 @@ class GetStartedButton extends React.Component {
                         username: postResponse.data.username,
                         email: postResponse.data.email,
                         firstName: postResponse.data.firstName,
-                        lastName: postResponse.data.lastName
+                        lastName: postResponse.data.lastName,
+                        money: postResponse.data.money
                     }
+                    console.log(profile);
                     this.props.logIn(true, profile);
                 }
             })
@@ -106,22 +108,24 @@ class GetStartedButton extends React.Component {
                             />
                         </div>
                         <h2>Or Sign up with:</h2>
-                        <label>Username: </label>
-                        <input
-                            onChange={this.handleChange}
-                            value={this.state.usernameValue}
-                            id="signup-username"
-                            type="text"
-                            name="username"
-                            placeholder="username"></input>
                         <form>
+                            <label>Username: </label>
+                            <input
+                                onChange={this.handleChange}
+                                value={this.state.usernameValue}
+                                id="signup-username"
+                                type="text"
+                                name="username"
+                                placeholder="username"></input>
                             <label>Password: </label>
                             {/* add a min length to password with minlength */}
                             <input
                                 onChange={this.handleChange}
                                 value={this.state.passwordValue}
-                                id="signup-pw" type="password"
+                                id="signup-pw"
+                                type="password"
                                 name="password"
+                                autoComplete="on"
                                 placeholder="password"></input>
                         </form>
                         <div id="google-button">
