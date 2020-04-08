@@ -57,7 +57,7 @@ let btcURL = `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&
 //         })
 // });
 
-// // Cryptocurrency template call
+// Cryptocurrency template call
 // axios.get(btcURL).then(res => {
 //         console.log(res.data)
 //     stocks.create(

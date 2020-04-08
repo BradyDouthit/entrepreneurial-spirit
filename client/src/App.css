@@ -12,6 +12,9 @@
   color: limegreen;
 }
 
+#view-profile-button {
+  margin-bottom: 15px;
+}
 .item-price {
   color: limegreen;
 }
@@ -81,6 +84,10 @@ button {
 
 #modal-content {
   padding: 20px;
+}
+
+#view-profile-button {
+  width: 70%;
 }
 
 #signup-pw {

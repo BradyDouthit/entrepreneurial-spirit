@@ -15,7 +15,7 @@ class App extends React.Component {
   state = {
     ItemList: [],
     updatedItemList: ItemList,
-    money: 10000,
+    money: 0,
     open: false,
     loggedIn: false,
     profile: null
@@ -23,6 +23,10 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getStocksData();
+  }
+
+  setMoney = (money) => {
+    this.setState({money: money})
   }
 
   getStocksData = () => {
@@ -43,7 +47,6 @@ class App extends React.Component {
           latestPrices: latestPrices,
           oldestPrices: oldestPrices
         }
-        console.log(prices)
         ItemListState.push(prices)
         this.setState({ ItemList: ItemListState })
         return prices;
@@ -64,11 +67,25 @@ class App extends React.Component {
       let roundedMoney = Math.round(100 * currentMoney) / 100;
       this.setState({ money: roundedMoney });
 
+      let purchaseData = {
+        _id: this.state.profile._id,
+        purchaseSymbol: itemID,
+        priceBought: itemPrice,
+        moneyAfterPurchase: roundedMoney
+      };
+      //post the new purchase to the server for saving in the database
+      axios.post( '/api/purchase', purchaseData )
+        .then(data => {
+        console.log(data)
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 
   logIn = (loggedInState, profile) => {
     this.setState({ loggedIn: loggedInState, profile: profile })
+    console.log(profile)
   }
 
   render() {
@@ -84,7 +101,7 @@ class App extends React.Component {
             getStocksData={this.getStocksData}
             ItemList={this.state.ItemList} />
           :
-          <LoginPage logIn={this.logIn} />
+          <LoginPage setMoney={this.setMoney} loggedIn={this.state.loggedIn} logIn={this.logIn} />
         }
       </div>
     );

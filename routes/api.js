@@ -44,7 +44,8 @@ router.post('/user/google/signup', (req, res) => {
                 "firstName": req.body.firstName,
                 "lastName": req.body.lastName,
                 "password": req.body.password,
-                "money": 10000
+                "money": 10000,
+                "purchases": []
             }).then(response => {
                 res.json(response)
                 console.log('----------DB SIGNUP RESPONSE----------')
@@ -72,6 +73,30 @@ router.post('/user/google/login', (req, res) => {
     }).catch(error => {
         console.log(error);
     });
+})
+
+router.post('/purchase', (req, res) => {
+    console.log(req.body)
+    let data = {
+        purchaseSymbol: req.body.purchaseSymbol,
+        priceBought: req.body.priceBought,
+        moneyAfterPurchase: req.body.moneyAfterPurchase,
+        datePurchased: new Date()
+    }
+    return Users.updateOne(
+        { _id: req.body._id },
+        { $push: { "purchases": data} }, 
+        { new: true, useFindAndModify: true }
+    ).then(response => { 
+        return Users.updateOne({ _id: req.body._id },{ money: req.body.moneyAfterPurchase })
+    }).then(updatedMoney => {
+        console.log('----------PURCHASE POST RESPONSE----------')
+        console.log(updatedMoney)
+        res.send("Purchase complete")
+    }).catch(err => {
+        console.log(err)
+        res.json(err)
+    })
 })
 
 module.exports = router;

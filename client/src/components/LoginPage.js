@@ -43,7 +43,7 @@ class LoginPage extends React.Component {
             }).play();
         }
         else if (!openState) {
-            //slid nav menu up
+            //slide nav menu up
             anime({
                 targets: "#nav-menu",
                 translateY: '-100vh',
@@ -64,7 +64,7 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div className='' id="login-page">
-                <NavMenu style={this.state.navStyles} />
+                <NavMenu loggedIn={this.props.loggedIn} style={this.state.navStyles} />
                 <div id="login-grid">
                     <Navbar isNavOpen={this.state.isNavOpen} playNavAnimation={this.playNavAnimation} />
                     <div id="welcome-message">
@@ -72,7 +72,7 @@ class LoginPage extends React.Component {
                         <p>Real stock prices, no risk.</p>
                     </div>
                     <div id="login-page-button-wrapper">
-                        <GetStartedButton logIn={this.props.logIn} />
+                        <GetStartedButton setMoney={this.props.setMoney}logIn={this.props.logIn} />
                     </div>
                 </div>
             </div>

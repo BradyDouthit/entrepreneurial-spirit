@@ -11,7 +11,8 @@ class GetStartedButton extends React.Component {
     state = {
         open: false,
         usernameValue: '',
-        passwordValue: ''
+        passwordValue: '',
+        logInError: false
     }
 
     signUpGoogleResponse = (response) => {
@@ -37,9 +38,10 @@ class GetStartedButton extends React.Component {
                         username: postResponse.data.username,
                         email: postResponse.data.email,
                         firstName: postResponse.data.firstName,
-                        lastName: postResponse.data.lastName
+                        lastName: postResponse.data.lastName,
+                        money: 10000
                     };
-
+                    this.props.setMoney(10000)
                     this.props.logIn(true, profile);
                 }
             })
@@ -56,18 +58,25 @@ class GetStartedButton extends React.Component {
                 googleID: googleId
             }).then(postResponse => {
                 if (postResponse.data.error) {
-                    console.log('could not log in: ' + postResponse.data.error)
+                    console.log('could not log in: ' + postResponse.data.error);
+                    this.setState({ logInError: true });
                 }
                 else {
                     let profile = {
+                        _id: postResponse.data._id,
+                        googleID: postResponse.data.googleID,
+                        email: postResponse.data.email,
                         username: postResponse.data.username,
                         email: postResponse.data.email,
                         firstName: postResponse.data.firstName,
                         lastName: postResponse.data.lastName,
-                        money: postResponse.data.money
+                        money: postResponse.data.money,
+                        purchases: postResponse.data.purchases
                     }
-                    console.log(profile);
+                    console.log("Setting profle...");
+                    console.log(profile.money)
                     this.props.logIn(true, profile);
+                    this.props.setMoney(profile.money)
                 }
             })
         }
@@ -107,6 +116,7 @@ class GetStartedButton extends React.Component {
                                 cookiePolicy={'single_host_origin'}
                             />
                         </div>
+                        {this.state.logInError ? <div style={{color: "red"}}>Could not log in (do you have an account?)</div> : <></>}
                         <h2>Or Sign up with:</h2>
                         <form>
                             <label>Username: </label>

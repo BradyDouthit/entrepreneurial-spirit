@@ -13,7 +13,8 @@ const userSchema = new Schema({
     firstName: String,
     lastName: String,
     password: String,
-    money: Number
+    money: Number,
+    purchases: Array
 });
 
 const Users = mongoose.model('Users', userSchema);
