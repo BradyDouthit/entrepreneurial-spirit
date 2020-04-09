@@ -19,13 +19,17 @@ class ViewProfileButton extends React.Component {
     };
 
     render() {
+        console.log(this.props.profile)
         const { open } = this.state;
         return (
             <div className="modal-button-wrapper">
                 <button onClick={this.onOpenModal} id="view-profile-button" className="modal-button">View Profile</button>
                 <Modal open={open} onClose={this.onCloseModal} center>
-                    <div id="modal-content">
+                    <div id="profile-modal">
                         <h2>{this.props.profile.firstName} {this.props.profile.lastName}</h2>
+                        <div>Email: {this.props.profile.email}</div>
+                        <br></br>
+                        <div>Username: {this.props.profile.username}</div>
                     </div>
                 </Modal>
             </div>
