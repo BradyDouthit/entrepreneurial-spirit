@@ -16,7 +16,7 @@ class LoginPage extends React.Component {
         },
         isNavOpen: false,
     }
-
+    //handle nav menu animations
     playNavAnimation = (openState) => {
         this.setState({
             navStyles: {

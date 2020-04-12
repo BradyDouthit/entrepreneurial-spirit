@@ -1,7 +1,8 @@
 import React from 'react';
 import PlayerInfo from './PlayerInfo';
 import Item from './Item';
-import StockChart from './StockChart';
+
+//use props passed from App.js to render components and map available items
 function StocksPage(props) {
     return (
         <div id="stocks-page">

@@ -9,11 +9,11 @@ class ViewProfileButton extends React.Component {
     state = {
         open: false,
     }
-
+    //open modal
     onOpenModal = () => {
         this.setState({ open: true });
     };
-
+    //close modal
     onCloseModal = () => {
         this.setState({ open: false });
     };

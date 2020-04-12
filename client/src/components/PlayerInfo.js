@@ -1,6 +1,7 @@
 import React from 'react';
 import ViewProfileButton from './ViewProfileButton';
 
+//get user information from props and fill in information accordingly
 function PlayerInfo(props) {
     return (
         <div id="player-info">

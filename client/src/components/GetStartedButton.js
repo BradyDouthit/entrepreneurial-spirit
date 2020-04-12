@@ -14,12 +14,13 @@ class GetStartedButton extends React.Component {
         passwordValue: '',
         logInError: false
     }
-
+    //called by the Google sign up button
     signUpGoogleResponse = (response) => {
         if (response.error) {
             console.log('could not sign up: ' + response.error);
         }
         else {
+            //if no error, proceed sending profile to the back end
             let googleProfile = response.profileObj;
             axios.post('/api/user/google/signup', {
                 googleID: googleProfile.googleId,
@@ -29,11 +30,12 @@ class GetStartedButton extends React.Component {
                 lastName: googleProfile.familyName,
                 password: this.state.passwordValue
             }).then(postResponse => {
-                console.log(postResponse)
+                console.log(postResponse);
                 if (postResponse.data.errmsg) {
-                    console.log("error: " + postResponse.data.errmsg)
+                    console.log("error: " + postResponse.data.errmsg);
                 }
                 else {
+                    //new user, so give $10000 to start with
                     let profile = {
                         username: postResponse.data.username,
                         email: postResponse.data.email,
@@ -41,7 +43,8 @@ class GetStartedButton extends React.Component {
                         lastName: postResponse.data.lastName,
                         money: 10000
                     };
-                    this.props.setMoney(10000)
+                    //these methods are passed down from App.js
+                    this.props.setMoney(profile.money);
                     this.props.logIn(true, profile);
                 }
             })
@@ -52,6 +55,7 @@ class GetStartedButton extends React.Component {
         if (response.error) {
             console.log('could not log in: ' + response.error)
         }
+        //if no error, continue to sign in
         else {
             let googleId = response.profileObj.googleId;
             axios.post('/api/user/google/login', {
@@ -61,6 +65,7 @@ class GetStartedButton extends React.Component {
                     console.log('could not log in: ' + postResponse.data.error);
                     this.setState({ logInError: true });
                 }
+                //if no error from the server, log in with server response
                 else {
                     let profile = {
                         _id: postResponse.data._id,
@@ -75,6 +80,7 @@ class GetStartedButton extends React.Component {
                     }
                     console.log("Setting profle...");
                     console.log(profile.money)
+                    //methods passed down from App.js
                     this.props.logIn(true, profile);
                     this.props.setMoney(profile.money)
                 }
@@ -82,6 +88,7 @@ class GetStartedButton extends React.Component {
         }
     }
 
+    //handle typing in sign-up fields
     handleChange = (event) => {
         if (event.target.name === "username") {
             this.setState({ usernameValue: event.target.value });
@@ -91,10 +98,12 @@ class GetStartedButton extends React.Component {
         }
     }
 
+    //open modal
     onOpenModal = () => {
         this.setState({ open: true });
     };
 
+    //close modal
     onCloseModal = () => {
         this.setState({ open: false });
     };
